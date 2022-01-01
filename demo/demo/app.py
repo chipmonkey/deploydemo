@@ -9,7 +9,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://demo:password@localhost/de
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
-from demo.models import Result
+from models import Result
 
 migrate = Migrate()
 migrate.init_app(app, db)

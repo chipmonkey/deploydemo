@@ -19,3 +19,14 @@ The ideas are good tho.  Like...
 Do this to connect to postgresql:
 
 `psql -U demo -W -h localhost`
+
+and use password: `password`
+
+# Postgresql upgrades:
+
+For now, from INSIDE the demo/demo folder (where `app.py` is), run:
+
+`python manage.py db upgrade`
+
+Or the usual `flask db...` commands (`init`, `migrate`, etc.).
+

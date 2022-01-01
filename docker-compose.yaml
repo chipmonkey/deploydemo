@@ -18,7 +18,7 @@ services:
       context: .
       dockerfile: Dockerfile.api
     volumes:
-       - .:/mnt
+       - ./:/mnt
     entrypoint: "/bin/bash -c './demo/start.bash'"
     stdin_open: true
     container_name: "demo-api"
