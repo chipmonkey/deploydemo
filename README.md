@@ -12,3 +12,10 @@ The ideas are good tho.  Like...
 * Red/Green Deployments
 * Zero-Downtime Deployments
 * That sort of thing
+
+
+# Dev Notes:
+
+Do this to connect to postgresql:
+
+`psql -U demo -W -h localhost`

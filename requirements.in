@@ -1,0 +1,10 @@
+# fastapi
+Flask-SQLAlchemy
+Flask-Migrate
+Flask-Script
+pydantic
+SQLAlchemy
+uvicorn
+requests
+psycopg2
+alembic
