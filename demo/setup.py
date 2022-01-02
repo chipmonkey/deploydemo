@@ -18,5 +18,5 @@ setup(
     packages=find_packages(),
     description="Simple demo with everything",
     install_requires=dependencies,
-    python_requires=">=3.9.0",
+    python_requires=">=3.8.0",
 )

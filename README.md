@@ -26,7 +26,7 @@ and use password: `password`
 
 For now, from INSIDE the demo/demo folder (where `app.py` is), run:
 
-`python manage.py db upgrade`
+`python -m manage db migrate -m "add users"` or `python manage.py db upgrade`
 
-Or the usual `flask db...` commands (`init`, `migrate`, etc.).
+For whatever reason, this works but `flask db...` commands (`init`, `migrate`, etc.). does not.
 
