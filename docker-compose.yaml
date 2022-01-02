@@ -5,7 +5,7 @@ services:
     build:
       context: .
     volumes:
-       - .:/mnt
+       - ./:/mnt
     entrypoint: "/bin/bash"
     stdin_open: true
     container_name: "demo-bash"

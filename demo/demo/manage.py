@@ -1,7 +1,7 @@
 import os
 
 from flask.cli import FlaskGroup
-from app import app, db
+from demo import app, db
 
 # app.config.from_object(os.environ['APP_SETTINGS'])
 
