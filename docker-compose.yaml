@@ -4,6 +4,7 @@ services:
   "demo-bash":
     build:
       context: .
+      dockerfile: Dockerfile.api
     volumes:
        - ./:/mnt
     entrypoint: "/bin/bash"
@@ -19,7 +20,8 @@ services:
       dockerfile: Dockerfile.api
     volumes:
        - ./:/mnt
-    entrypoint: "/bin/bash -c './demo/start.bash'"
+    # entrypoint: "/bin/bash -c './demo/start.bash'"
+    entrypoint: "/bin/bash -c './start.bash'"
     stdin_open: true
     container_name: "demo-api"
     tty: true

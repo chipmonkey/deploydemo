@@ -8,8 +8,8 @@ ADD requirements.txt /tmp/requirements.txt
 RUN pip install --upgrade pip
 RUN pip install -r /tmp/requirements.txt
 
-ADD demo /demo
-WORKDIR /demo
-RUN pip install -e .
+# ADD demo /demo
+# WORKDIR /demo
+# RUN pip install -e .
 
-WORKDIR /mnt
+WORKDIR /mnt/demo
