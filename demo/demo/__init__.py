@@ -4,9 +4,11 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'postgresql://demo:password@demo-postgres/demo')
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
+    "DATABASE_URL", "postgresql://demo:password@demo-postgres/demo"
+)
 # app.config.from_object(os.environ['APP_SETTINGS'])
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 db = SQLAlchemy(app)
 
 # from models import Result
@@ -18,5 +20,5 @@ migrate.init_app(app, db)
 
 import demo.views
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()

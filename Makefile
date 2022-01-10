@@ -41,3 +41,7 @@ db-migrate:  ## Create an alembic migration for the database version
 
 db-upgrade:  ## Apply the latest database version definition
 	docker-compose exec --env FLASK_APP=demo demo-api flask db upgrade
+
+.PHONY: dlogs
+dlogs:  ## Follow docker-api logs
+	docker logs -f demo-api
