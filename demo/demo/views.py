@@ -5,7 +5,7 @@ Do a thing
 from demo import app, db
 
 from demo.models import User
-from flask import request, redirect, jsonify
+from flask import request, redirect, jsonify, abort
 
 
 @app.route("/")
@@ -49,12 +49,23 @@ def adduser():
     return request.json
 
 
-@app.route("/userx/", methods=["PATCH"])
-@app.route("/userx", methods=["PATCH"])
+@app.route("/user/", methods=["PATCH"])
+@app.route("/user", methods=["PATCH"])
 def patchuser():
     """
     Patch User
     """
+    name = request.json.get("name")
+    if not name:
+        abort(404)
+
+    userid = request.json.get("userid")
+    if not userid:
+        abort(404)
+
+    user = User.query.filter_by(id=userid).first()
+    user.name = name
+    db.session.commit()
     return request.json
 
 
