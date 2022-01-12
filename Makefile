@@ -10,7 +10,7 @@ all: load-users  ## Load users and open docs
 
 .PHONY: docker-start
 docker-start:  ## Start most recent build
-	docker compose up -d
+	docker compose up -d --scale demo-api=2
 
 .PHONY: docker-stop
 docker-stop:  ## Murder the system
@@ -22,11 +22,11 @@ docker-rebuild: docker-stop  ## Update everything
 
 .PHONY: load-users
 load-users: docker-start  ## Load users
-	docker compose exec demo-bash python3 example.py
+	docker compose exec demo-api python3 example.py
 
 .PHONY: bash
 bash:  ## Open dev bash shell
-	docker compose exec demo-bash bash
+	docker compose exec demo-api bash
 
 .PHONY: sql
 sql:  ## Open a psql shell
@@ -45,3 +45,6 @@ db-upgrade:  ## Apply the latest database version definition
 .PHONY: dlogs
 dlogs:  ## Follow docker-api logs
 	docker logs -f demo-api
+
+reload_nginx:
+	docker exec nginx /usr/sbin/nginx -s reload
