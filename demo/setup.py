@@ -1,8 +1,10 @@
-import os
+import os, re, io
 from setuptools import setup, find_packages
 
-with open("VERSION") as f:
-    version = f.read().strip()
+version = re.search(
+    r'__version__\s*=\s*[\'"]([^\'"]*)[\'"]',  # It excludes inline comment too
+    io.open('demo/__init__.py', encoding='utf_8_sig').read()
+    ).group(1)
 
 requirements_path = os.path.join(os.path.dirname(__file__), "requirements2.txt")
 with open(requirements_path) as f:
