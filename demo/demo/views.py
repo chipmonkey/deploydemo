@@ -62,7 +62,7 @@ def adduser():
 @app.route("/user", methods=["PATCH"])
 def patchuser():
     """
-    Patch User
+    Patch User to update name
     """
     name = request.json.get("name")
     if not name:

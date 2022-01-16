@@ -46,3 +46,7 @@ reload_nginx:  ## Restart nginx (gracefully - and reread nginx.conf file)
 
 wheel:  ## Compile current demo python package to a wheel file CHECK VERSION NUMBER!
 	pip wheel ./demo -w ./wheels --no-deps
+
+.PHONY: perftest
+perftest:
+	$(MAKE) -C perftest perftest
