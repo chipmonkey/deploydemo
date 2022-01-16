@@ -50,3 +50,7 @@ wheel:  ## Compile current demo python package to a wheel file CHECK VERSION NUM
 .PHONY: perftest
 perftest:
 	$(MAKE) -C perftest perftest
+	docker exec nginx /usr/sbin/nginx -s reload
+
+wheel:
+	pip wheel ./demo -w ./wheels --no-deps
