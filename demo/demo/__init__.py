@@ -1,9 +1,14 @@
+"""
+Initialize me!
+"""
+
+import os
+
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-import os
 
-__version__ = '0.0.1'
+__version__ = "2.0.0"
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
@@ -13,14 +18,15 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 db = SQLAlchemy(app)
 
-# from models import Result
-from demo import models
+from demo import models  # pylint: disable=wrong-import-position
 
 migrate = Migrate()
 migrate.init_app(app, db)
 
 
-import demo.views
+from demo.views import users  # pylint: disable=wrong-import-position
+from demo.views import docs  # pylint: disable=wrong-import-position
+# import demo.views  # pylint: disable=wrong-import-position
 
 if __name__ == "__main__":
     app.run()

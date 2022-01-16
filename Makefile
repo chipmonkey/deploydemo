@@ -47,3 +47,7 @@ reload_nginx:
 .PHONY: perftest
 perftest:
 	$(MAKE) -C perftest perftest
+	docker exec nginx /usr/sbin/nginx -s reload
+
+wheel:
+	pip wheel ./demo -w ./wheels --no-deps

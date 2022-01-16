@@ -1,6 +1,7 @@
 flask
 flask-restful
 flask-sqlalchemy
+flask-swagger
 flask-migrate
 alembic
 psycopg2

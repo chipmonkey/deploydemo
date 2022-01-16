@@ -2,6 +2,7 @@
 Flask-SQLAlchemy
 Flask-Migrate
 Flask-Script
+flask-swagger
 pydantic
 SQLAlchemy
 uvicorn
