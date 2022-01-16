@@ -43,3 +43,7 @@ dlogs:  ## Follow docker-api logs
 
 reload_nginx:
 	docker-compose exec demo-nginx /usr/sbin/nginx -s reload
+
+.PHONY: perftest
+perftest:
+	$(MAKE) -C perftest perftest
