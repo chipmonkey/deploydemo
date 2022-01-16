@@ -2,31 +2,24 @@ from demo import db
 from sqlalchemy.dialects.postgresql import JSON
 
 
-class Result(db.Model):
-    __tablename__ = "results"
-
-    id = db.Column(db.Integer, primary_key=True)
-    url = db.Column(db.String())
-    result_all = db.Column(JSON)
-    result_no_stop_words = db.Column(JSON)
-
-    def __init__(self, url, result_all, result_no_stop_words):
-        self.url = url
-        self.result_all = result_all
-        self.result_no_stop_words = result_no_stop_words
-
-    def __repr__(self):
-        return "<id {}>".format(self.id)
-
-
 class User(db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())
+    first = db.Column(db.String())
+    last = db.Column(db.String())
 
     def __init__(self, name):
         self.name = name
+
+    @classmethod
+    def init_v2(cls, first, last):
+        result = cls(first + ' ' + last)
+        result.first = first
+        result.last = last
+        return result
+        
 
     def __repr__(self):
         return f"<id: {self.id}, name: {self.name}>"
@@ -36,5 +29,7 @@ class User(db.Model):
        """Return object data in easily serializable format"""
        return {
            'id'         : self.id,
-           'name'       : self.name
+           'name'       : self.name,
+           'first'      : self.first,
+           'last'       : self.last
        }

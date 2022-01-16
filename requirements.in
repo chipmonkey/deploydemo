@@ -2,9 +2,11 @@
 Flask-SQLAlchemy
 Flask-Migrate
 Flask-Script
+flask-swagger
 pydantic
 SQLAlchemy
 uvicorn
 requests
 psycopg2
 alembic
+names
