@@ -34,12 +34,15 @@ db-migrate:  ## Create an alembic migration for the database version
 db-upgrade:  ## Apply the latest database version definition
 	docker-compose exec --env FLASK_APP=demo demo-api flask db upgrade
 
+make-users:  ## Create 100 random user records
+	docker-compose exec --env FLASK_APP=demo demo-api python makeusers.py
+
 .PHONY: dlogs
 dlogs:  ## Follow docker-api logs
-	docker logs -f demo-api
+	docker-compose logs -f demo-api
 
-reload_nginx:
-	docker exec nginx /usr/sbin/nginx -s reload
+reload_nginx:  ## Restart nginx (gracefully - and reread nginx.conf file)
+	docker-compose exec demo-nginx /usr/sbin/nginx -s reload
 
-wheel:
+wheel:  ## Compile current demo python package to a wheel file CHECK VERSION NUMBER!
 	pip wheel ./demo -w ./wheels --no-deps
