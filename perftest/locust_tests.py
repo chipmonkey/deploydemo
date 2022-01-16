@@ -4,7 +4,6 @@ Performance testing for CENtree API
 
 import os
 import random
-import json
 import names
 from dotenv import load_dotenv
 from locust import HttpUser, task, between
@@ -20,7 +19,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 host = os.getenv("host", "localhost")
 port = os.getenv("port", "8000")
 
-NUMUSERS = 10
+NUMUSERS = 50
 
 class QuickstartUser(HttpUser):
     """ Default locust test user.
@@ -30,15 +29,15 @@ class QuickstartUser(HttpUser):
 
     @task
     def change_random_user_name(self):
-        """ Picks a random user_id and changes its name
+        """ Picks a random userid and changes its name
         """
-        user_id = random.randint(1, NUMUSERS)
+        userid = random.randint(1, NUMUSERS)
         name = names.get_full_name()
         payload = {
-            'user_id': user_id,
+            'userid': userid,
             'name': name
         }
-        self.client.post(
+        self.client.patch(
             "/user/",
             json=payload,
             verify=False,

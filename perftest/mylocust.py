@@ -12,7 +12,7 @@ class QuickstartUser(HttpUser):
         pwd = pwo.generate()
         self.client.get("/login.php")
         self.client.post("/login.php",
-                {'username': 'mstefferson@manifold.ai',
+                {'username': 'random@chipmonkey.test',
                  'password': pwd})
         # time.sleep(0.05)
 

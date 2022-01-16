@@ -23,7 +23,7 @@ def hello_name(name):
 
 
 @app.route("/user/<userid>", methods=["GET"])
-def user_userid(userid):
+def get_user_by_userid(userid):
     """
     Get it
     """
@@ -31,6 +31,15 @@ def user_userid(userid):
 
     # return f"Get User {userid} from db"
     return jsonify(result.serialize)
+
+@app.route("/users/", methods=["GET"])
+def get_users():
+    """
+    Get them all
+    """
+    result = User.query.all()
+
+    return jsonify([x.serialize for x in result])
 
 
 @app.route("/user/", methods=["POST"])

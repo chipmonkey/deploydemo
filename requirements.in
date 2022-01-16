@@ -8,3 +8,4 @@ uvicorn
 requests
 psycopg2
 alembic
+names
