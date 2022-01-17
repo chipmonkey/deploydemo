@@ -40,3 +40,11 @@ dlogs:  ## Follow docker-api logs
 
 reload_nginx:
 	docker exec nginx /usr/sbin/nginx -s reload
+
+.PHONY: perftest
+perftest:
+	$(MAKE) -C perftest perftest
+
+.PHONY: wheel
+wheel:
+	pip wheel ./demo -w ./wheels --no-deps

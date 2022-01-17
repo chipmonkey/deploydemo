@@ -1,6 +1,17 @@
 # deploydemo
 Fun and exciting ways to deploy a standard web app backend
 
+#### Debugging:
+
+This seems to work...
+
+```
+export FLASK_APP=demo
+pip install -e ./demo
+flask run
+```
+
+
 ## This is a demo
 The code is undoubtedly horrible.
 
