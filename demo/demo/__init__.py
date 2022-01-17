@@ -3,7 +3,7 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 import os
 
-__version__ = '0.0.1'
+__version__ = '1.0.0'
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
@@ -20,7 +20,4 @@ migrate = Migrate()
 migrate.init_app(app, db)
 
 
-import demo.views
-
-if __name__ == "__main__":
-    app.run()
+from demo.views import users

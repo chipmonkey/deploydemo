@@ -40,3 +40,6 @@ dlogs:  ## Follow docker-api logs
 
 reload_nginx:
 	docker exec nginx /usr/sbin/nginx -s reload
+
+wheel:
+	pip wheel ./demo -w ./wheels --no-deps
