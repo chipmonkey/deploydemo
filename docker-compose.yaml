@@ -20,7 +20,7 @@ services:
     volumes:
        - ./:/mnt
     # entrypoint: "/bin/bash -c './demo/start.bash'"
-    entrypoint: "/bin/bash -c './start.bash'"
+    entrypoint: "/bin/bash -c './start-v1.bash'"
     stdin_open: true
     tty: true
     networks:
