@@ -18,6 +18,7 @@ setup(
     package_dir={"demo": "./demo"},
     py_modules=["demo"],
     packages=find_packages(),
+    include_package_data=True,
     description="Simple demo with everything",
     install_requires=dependencies,
     python_requires=">=3.8.0",

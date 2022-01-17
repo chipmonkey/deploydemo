@@ -18,9 +18,20 @@ services:
       context: .
       dockerfile: Dockerfile.api
     volumes:
-       - ./:/mnt
-    # entrypoint: "/bin/bash -c './demo/start.bash'"
-    entrypoint: "/bin/bash -c './start.bash'"
+       - ./wheels:/mnt/wheels
+    entrypoint: "/bin/bash -c './start-v1.bash'"
+    stdin_open: true
+    tty: true
+    networks:
+      - demo
+
+  "demo-api-v2":
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    volumes:
+       - ./wheels:/mnt/wheels
+    entrypoint: "/bin/bash -c './start-v2.bash'"
     stdin_open: true
     tty: true
     networks:

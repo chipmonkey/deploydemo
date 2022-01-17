@@ -26,7 +26,4 @@ migrate.init_app(app, db)
 
 from demo.views import users  # pylint: disable=wrong-import-position
 from demo.views import docs  # pylint: disable=wrong-import-position
-# import demo.views  # pylint: disable=wrong-import-position
 
-if __name__ == "__main__":
-    app.run()

@@ -6,7 +6,8 @@ help:
 
 .PHONY: docker-start
 docker-start:  ## Start most recent build
-	docker-compose up -d --scale demo-api=2
+	# docker-compose up -d --scale demo-api=2
+	docker-compose up -d
 
 .PHONY: docker-stop
 docker-stop:  ## Murder the system
@@ -41,13 +42,12 @@ make-users:  ## Create 100 random user records
 dlogs:  ## Follow docker-api logs
 	docker-compose logs -f demo-api
 
-reload_nginx:
+reload_nginx:  ## No-downtime reload nginx config
 	docker-compose exec demo-nginx /usr/sbin/nginx -s reload
 
 .PHONY: perftest
 perftest:
 	$(MAKE) -C perftest perftest
-	docker exec nginx /usr/sbin/nginx -s reload
 
 wheel:
 	pip wheel ./demo -w ./wheels --no-deps
