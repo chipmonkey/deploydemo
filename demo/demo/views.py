@@ -32,6 +32,15 @@ def user_userid(userid):
     # return f"Get User {userid} from db"
     return jsonify(result.serialize)
 
+@app.route("/users/", methods=["GET"])
+def get_users():
+    """
+    Get them all
+    """
+    result = User.query.order_by(User.id).all()
+
+    return jsonify([x.serialize for x in result])
+
 
 @app.route("/user/", methods=["POST"])
 @app.route("/user", methods=["POST"])
@@ -67,11 +76,3 @@ def patchuser():
     user.name = name
     db.session.commit()
     return request.json
-
-
-@app.route("/user/<int:userid>", methods=["POST"])
-def updateuser(userid):
-    """
-    Update User
-    """
-    return "Update User {userid} from db".format(userid)

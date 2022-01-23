@@ -19,8 +19,7 @@ services:
       dockerfile: Dockerfile.api
     volumes:
        - ./:/mnt
-    # entrypoint: "/bin/bash -c './demo/start.bash'"
-    entrypoint: "/bin/bash -c './start.bash'"
+    entrypoint: "/bin/bash -c '/mnt/demo/start.bash'"
     stdin_open: true
     tty: true
     networks:

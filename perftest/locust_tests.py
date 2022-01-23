@@ -4,16 +4,12 @@ Performance testing for CENtree API
 
 import os
 import random
-import json
 import names
-from dotenv import load_dotenv
 from locust import HttpUser, task, between
 
 # from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import urllib3
 
-
-load_dotenv()
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -29,13 +25,13 @@ class QuickstartUser(HttpUser):
     wait_time = between(1, 2.5)
 
     @task
-    def change_random_user_name(self):
-        """ Picks a random user_id and changes its name
+    def post_random_user_name(self):
+        """ Posts a random userid and name to /user/
         """
-        user_id = random.randint(1, NUMUSERS)
+        userid = random.randint(1, NUMUSERS)
         name = names.get_full_name()
         payload = {
-            'user_id': user_id,
+            'userid': userid,
             'name': name
         }
         self.client.post(
@@ -45,9 +41,24 @@ class QuickstartUser(HttpUser):
             allow_redirects=False,
         )
 
+    @task
+    def patch_random_user_name(self):
+        """ PATCHes a random userid and name to /user/
+        """
+        userid = random.randint(1, NUMUSERS)
+        name = names.get_full_name()
+        payload = {
+            'userid': userid,
+            'name': name
+        }
+        self.client.patch(
+            "/user/",
+            json=payload,
+            verify=False,
+            allow_redirects=False,
+        )
 
     def on_start(self):
         """ Set authorization headers for requests with JWT token (from environment)
         """
-        # self.client.headers = {"Authorization": f"Bearer {api_token}"}
         self.client.headers = {"Content-Type": "application/json"}

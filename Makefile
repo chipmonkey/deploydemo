@@ -6,7 +6,8 @@ help:
 
 .PHONY: docker-start
 docker-start:  ## Start most recent build
-	docker-compose up -d --scale demo-api=2
+	# docker-compose up -d --scale demo-api=2
+	docker-compose up -d
 
 .PHONY: docker-stop
 docker-stop:  ## Murder the system
@@ -26,20 +27,24 @@ sql:  ## Open a psql shell
 
 .PHONY: db-init db-migrate db-upgrade
 db-init:  ## Initialize the database
-	docker-compose exec --env FLASK_APP=demo demo-api flask db init
+	docker-compose exec --env FLASK_APP=demo demo-api flask db init --directory /mnt/migrations
 
 db-migrate:  ## Create an alembic migration for the database version
-	docker-compose exec --env FLASK_APP=demo demo-api flask db migrate
+	docker-compose exec --env FLASK_APP=demo demo-api flask db migrate --directory /mnt/migrations
 
 db-upgrade:  ## Apply the latest database version definition
-	docker-compose exec --env FLASK_APP=demo demo-api flask db upgrade
+	docker-compose exec --env FLASK_APP=demo demo-api flask db upgrade --directory /mnt/migrations
 
 .PHONY: dlogs
 dlogs:  ## Follow docker-api logs
-	docker logs -f demo-api
+	docker-compose logs -f demo-api
 
 reload_nginx:
-	docker exec nginx /usr/sbin/nginx -s reload
+	docker-compose exec nginx /usr/sbin/nginx -s reload
 
 wheel:
 	pip wheel ./demo -w ./wheels --no-deps
+
+.PHONY: perftest
+perftest:
+	$(MAKE) -C perftest perftest
