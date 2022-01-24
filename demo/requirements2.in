@@ -1,0 +1,8 @@
+flask
+flask-restful
+flask-sqlalchemy
+flask-migrate
+alembic
+psycopg2
+# uvicorn
+gunicorn

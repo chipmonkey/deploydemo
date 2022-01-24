@@ -1,0 +1,42 @@
+version: '3'
+services:
+
+  "demo-nginx":
+    image: nginx:latest
+    ports:
+      - 8000:8000
+    volumes:
+       - ./nginx.conf:/etc/nginx/nginx.conf
+       - ./:/mnt
+    depends_on:
+      - demo-api
+    networks:
+      - demo
+
+  "demo-api":
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    volumes:
+       - ./:/mnt
+    entrypoint: "/bin/bash -c '/mnt/demo/start.bash'"
+    stdin_open: true
+    tty: true
+    networks:
+      - demo
+
+  "demo-postgres":
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: demo
+      POSTGRES_HOST_AUTH_METHOD: trust
+    networks:
+      - demo
+    ports:
+      - 5432:5432
+    container_name: "demo-postgres"
+
+networks:
+  demo:
