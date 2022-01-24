@@ -17,6 +17,10 @@ docker-stop:  ## Murder the system
 docker-rebuild: docker-stop  ## Update everything
 	docker-compose build
 
+.PHONY: v2-start
+v2-start:  ## Start v2 api alone
+	docker-compose up -d demo-api-v2
+
 .PHONY: bash
 bash:  ## Open dev bash shell
 	docker-compose exec demo-api bash
@@ -32,6 +36,9 @@ db-init:  ## Initialize the database
 db-migrate:  ## Create an alembic migration for the database version
 	docker-compose exec --env FLASK_APP=demo demo-api flask db migrate --directory /mnt/migrations
 
+db-v1:  ## Apply v1 of the database
+	docker-compose exec --env FLASK_APP=demo demo-api flask db upgrade --directory /mnt/migrations a5d47eb28402
+
 db-upgrade:  ## Apply the latest database version definition
 	docker-compose exec --env FLASK_APP=demo demo-api flask db upgrade --directory /mnt/migrations
 
@@ -40,7 +47,7 @@ dlogs:  ## Follow docker-api logs
 	docker-compose logs -f demo-api
 
 reload_nginx:
-	docker-compose exec nginx /usr/sbin/nginx -s reload
+	docker-compose exec demo-nginx /usr/sbin/nginx -s reload
 
 wheel:
 	pip wheel ./demo -w ./wheels --no-deps

@@ -25,6 +25,18 @@ services:
     networks:
       - demo
 
+  "demo-api-v2":
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    volumes:
+       - ./:/mnt
+    entrypoint: "/bin/bash -c '/mnt/demo/start.bash'"
+    stdin_open: true
+    tty: true
+    networks:
+      - demo
+
   "demo-postgres":
     image: postgres:latest
     environment:
@@ -37,6 +49,16 @@ services:
     ports:
       - 5432:5432
     container_name: "demo-postgres"
+
+  "pgadmin":
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin@test.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    networks:
+      - demo
+    ports:
+      - 8080:80
 
 networks:
   demo:
