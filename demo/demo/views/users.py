@@ -28,6 +28,7 @@ def user_userid(userid):
     Get it
     """
     result = User.query.filter_by(id=userid).first()
+    db.session.remove()
 
     # return f"Get User {userid} from db"
     return jsonify(result.serialize)
@@ -38,6 +39,7 @@ def get_users():
     Get them all
     """
     result = User.query.order_by(User.id).all()
+    db.session.remove()
 
     return jsonify([x.serialize for x in result])
 

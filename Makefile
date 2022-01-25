@@ -17,6 +17,10 @@ docker-stop:  ## Murder the system
 docker-rebuild: docker-stop  ## Update everything
 	docker-compose build
 
+.PHONY: docker-v101
+docker-v101:
+	docker-compose up -d demo-api-v101
+
 .PHONY: bash
 bash:  ## Open dev bash shell
 	docker-compose exec demo-api bash
@@ -40,7 +44,7 @@ dlogs:  ## Follow docker-api logs
 	docker-compose logs -f demo-api
 
 reload_nginx:
-	docker-compose exec nginx /usr/sbin/nginx -s reload
+	docker-compose exec demo-nginx /usr/sbin/nginx -s reload
 
 wheel:
 	pip wheel ./demo -w ./wheels --no-deps

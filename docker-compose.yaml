@@ -25,6 +25,18 @@ services:
     networks:
       - demo
 
+  "demo-api-v101":
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    volumes:
+       - ./:/mnt
+    entrypoint: "/bin/bash -c '/mnt/demo/start.bash'"
+    stdin_open: true
+    tty: true
+    networks:
+      - demo
+
   "demo-postgres":
     image: postgres:latest
     environment:

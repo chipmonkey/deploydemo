@@ -3,7 +3,7 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 echo $SCRIPT_DIR
 
-pip install /mnt/wheels/demo-1.0.0-py3-none-any.whl
+pip install /mnt/wheels/demo-1.0.1-py3-none-any.whl
 
 # uvicorn --reload --host=0.0.0.0 demo.app:app
 # gunicorn --bind 0.0.0.0 demo:app
