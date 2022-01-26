@@ -11,7 +11,7 @@ docker-start:  ## Start most recent build
 
 .PHONY: docker-stop
 docker-stop:  ## Murder the system
-	docker-compose down
+	docker-compose down --remove-orphans
 
 .PHONY: docker-rebuild
 docker-rebuild: docker-stop  ## Update everything
