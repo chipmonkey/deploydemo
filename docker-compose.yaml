@@ -9,23 +9,11 @@ services:
        - ./nginx.conf:/etc/nginx/nginx.conf
        - ./:/mnt
     depends_on:
-      - demo-api
+      - demo-api-v201
     networks:
       - demo
 
-  "demo-api":
-    build:
-      context: .
-      dockerfile: Dockerfile.api
-    volumes:
-       - ./:/mnt
-    entrypoint: "/bin/bash -c '/mnt/demo/start.bash'"
-    stdin_open: true
-    tty: true
-    networks:
-      - demo
-
-  "demo-api-v2":
+  "demo-api-v201":
     build:
       context: .
       dockerfile: Dockerfile.api

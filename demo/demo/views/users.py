@@ -56,6 +56,7 @@ def adduser():
         abort(404)
 
     user = User(name=name)
+    user.first, user.last = name.split()
     db.session.add(user)
     db.session.commit()
     return request.json
@@ -72,6 +73,7 @@ def v2_adduser():
         abort(404)
 
     user = User.init_v2(first=first, last=last)
+    user.name = first + ' ' + last
     db.session.add(user)
     db.session.commit()
     return request.json
@@ -96,6 +98,7 @@ def patchuser():
 
     user = User.query.filter_by(id=userid).first()
     user.name = name
+    user.first, user.last = name.split()
     db.session.commit()
     return request.json
 
@@ -120,5 +123,6 @@ def v2_patchuser():
     user = User.query.filter_by(id=userid).first()
     user.first = first
     user.last = last
+    user.name = first + ' ' + last
     db.session.commit()
     return request.json

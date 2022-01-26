@@ -18,6 +18,7 @@ class User(db.Model):
         result = cls(first + ' ' + last)
         result.first = first
         result.last = last
+        result.name = first + ' ' + last
         return result
         
 
